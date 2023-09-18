@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "Astro portfolio",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -15,6 +15,6 @@
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.1.0"
+    "@biomejs/biome": "^1.1.0"
   }
 }
