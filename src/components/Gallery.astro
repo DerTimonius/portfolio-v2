@@ -1,0 +1,21 @@
+---
+import type { Image} from '../utils/interface'
+import GalleryItem from './GalleryItem.astro';
+
+interface Props {
+  images: Image[]
+}
+
+const {images} = Astro.props
+---
+
+<div
+  id="my-gallery"
+  class="w-max grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+>
+  {
+    images.map((image) => (
+      <GalleryItem image={image} />
+    ))
+  }
+</div>
