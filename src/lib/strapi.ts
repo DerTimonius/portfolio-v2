@@ -9,7 +9,7 @@ export default async function fetchApi<T>({
   endpoint,
   query,
   id,
-  returnOnlyData = false,
+  returnOnlyData = true,
 }: FetchAPIParams): Promise<T> {
   const url = new URL(
     `${import.meta.env.STRAPI_URL}/api/${endpoint}${id ? `/${id}` : ''}${

@@ -1,12 +1,15 @@
 export interface ApiImage {
-  id: string;
+  id: number;
   attributes: {
     title: string;
     shutterSpeed: string;
     aperture: string;
     focalLength: string;
     camera: string;
+    description: string;
+    location: string;
     file: FileInfo;
+    slug: string;
   };
 }
 
@@ -31,28 +34,7 @@ export interface Image {
   url: string;
   width: number;
   height: number;
+  slug: string;
+  description: string;
+  location: string;
 }
-
-// images {
-//   data: {
-//     id: 1,
-//     attributes: {
-//       name: 'DSCF0623.jpg',
-//       alternativeText: null,
-//       caption: null,
-//       width: 5152,
-//       height: 7728,
-//       formats: [Object],
-//       hash: 'DSCF_0623_ae119772f4',
-//       ext: '.jpg',
-//       mime: 'image/jpeg',
-//       size: 2759.92,
-//       url: '/uploads/DSCF_0623_ae119772f4.jpg',
-//       previewUrl: null,
-//       provider: 'local',
-//       provider_metadata: null,
-//       createdAt: '2023-09-18T12:18:37.519Z',
-//       updatedAt: '2023-09-18T12:18:37.519Z'
-//     }
-//   }
-// }

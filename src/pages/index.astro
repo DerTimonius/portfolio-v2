@@ -1,54 +1,22 @@
 ---
-import { Image } from 'astro:assets';
-import Layout from '../layouts/Layout.astro';
-import fetchApi from "../lib/strapi"
-import type {ApiImage as ImageType} from "../utils/interface"
-import {getImageInfo} from "../utils/getImageInfo"
+import Layout from '~/layouts/Layout.astro';
+import fetchApi from "~/lib/strapi"
+import type {Image as ImageT, ApiImage as ImageType} from "~/utils/interface"
+import {getImageInfo} from "~/utils/getImageInfo"
+import Gallery from '~/components/Gallery.astro';
 
 const images = await fetchApi<ImageType[]>({endpoint: "images", returnOnlyData: true, query: "?populate=*"})
 const imagesWithInfo = images.map(img => getImageInfo(img))
+const moreImages = new Array(4).fill(imagesWithInfo).flat() as ImageT[]
+
 ---
 
 <Layout title="DerTimonius">
-	<main>
-		<h1>This is a gallery</h1>
-			<div
-				id="my-gallery"
-				class="pswp-gallery grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8 gallery"
-			>
-				<div class="grid grid-cols-2 grid-flow-row gap-x-5 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
-					{imagesWithInfo.map(img => {
-						return (<div
-									class="aspect-square overflow-hidden w-[320px] h-[320px] hover:backdrop-brightness-75 hover:p-2 hover:max-h-[580px]"
-								>
-									<div class="w-full h-full rounded-lg overflow-hidden">
-										<Image
-											alt="gallery"
-											class="block h-full w-full rounded-lg object-cover object-center hover:object-contain"
-											height={320}
-											width={320}
-											src={`${import.meta.env.STRAPI_URL}${img.url}`}
-										/>
-									</div>
-								</div>)
-					})}
-												</div>
-
-			</div>
-
-	</main>
+	<h1>This is a gallery</h1>
+	<Gallery images={moreImages} />
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
 	.astro-a {
 		position: absolute;
 		top: -32px;

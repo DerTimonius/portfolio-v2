@@ -1,0 +1,43 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
+import Layout from "~/layouts/Layout.astro";
+import { getSingleImage } from "~/utils/getImageInfo";
+import {getImageRoutes} from "~/utils/routes"
+import fetchApi from "~/lib/strapi"
+
+export const getStaticPaths = ( async () => {
+  return (await getImageRoutes()).map(slug => {
+    return {
+      params: {slug: slug}
+    }
+  });
+}) satisfies GetStaticPaths;
+
+const {slug} = Astro.params
+const image = await getSingleImage(slug!)
+
+---
+
+<Layout title={image.title}>
+  <h1 class="text-white text-7xl font-bold" transition:name={`${image.title}-name`}>{image.title}</h1>
+  <div class="flex flex-row p-12 w-full justify-between">
+    <div class="max-h-[720px] max-w-[720px]">
+      <Image
+      src={image.url}
+      alt={image.title}
+      height={image.height}
+      width={image.width}
+      transition:name={`${image.title}-image`}
+      />
+    </div>
+    <div class="flex flex-col">
+      <p><span class="font-semibold">Camera: </span>{image.camera}</p>
+      <p><span class="font-semibold">Focal length: </span>{image.focalLength}</p>
+      <p><span class="font-semibold">Shutter speed: </span>{image.shutterSpeed}</p>
+      <p><span class="font-semibold">Aperture: </span>{image.aperture}</p>
+      <p><span class="font-semibold">Location: </span>{image.location}</p>
+      <p>{image.description}</p>
+    </div>
+  </div>
+</Layout>
