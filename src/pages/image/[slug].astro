@@ -1,43 +1,55 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { Image } from "astro:assets";
+import classNames from "classnames";
 import Layout from "~/layouts/Layout.astro";
-import { getSingleImage } from "~/utils/getImageInfo";
-import {getImageRoutes} from "~/utils/routes"
-import fetchApi from "~/lib/strapi"
+import { getSingleImage } from "~/utils/images";
+import { getImageRoutes } from "~/utils/routes";
 
-export const getStaticPaths = ( async () => {
-  return (await getImageRoutes()).map(slug => {
+export const getStaticPaths = (async () => {
+  return (await getImageRoutes()).map((slug) => {
     return {
-      params: {slug: slug}
-    }
+      params: { slug },
+    };
   });
 }) satisfies GetStaticPaths;
 
-const {slug} = Astro.params
-const image = await getSingleImage(slug!)
-
+const { slug } = Astro.params;
+const image = await getSingleImage(slug!);
+const portrait = image.width < image.height
+const classes = classNames("container grid items-start gap-8 px-4 md:px-6", {"lg:grid-cols-2": portrait})
 ---
 
 <Layout title={image.title}>
-  <h1 class="text-white text-7xl font-bold" transition:name={`${image.title}-name`}>{image.title}</h1>
-  <div class="flex flex-row p-12 w-full justify-between">
-    <div class="max-h-[720px] max-w-[720px]">
+  <section class="flex flex-col items-center w-full py-6 md:py-12">
+    <div class={classes}>
       <Image
-      src={image.url}
-      alt={image.title}
-      height={image.height}
-      width={image.width}
-      transition:name={`${image.title}-image`}
-      />
+        src={image.url}
+        alt={image.title}
+        height={image.height}
+        width={image.width}
+        class="max-h-[95vh] object-contain object-center rounded-sm"
+        transition:name={`${image.title}-image`}
+      /><div class="space-y-6">
+        <h1
+          class="text-4xl font-bold tracking-tighter"
+          transition:name={`${image.title}-name`}
+        >
+          {image.title}
+        </h1><div class="space-y-2">
+          <p class="text-base text-zinc-500 dark:text-zinc-400">
+            {image.camera}
+          </p><p class="text-base text-zinc-500 dark:text-zinc-400">
+            {image.aperture}
+          </p><p class="text-base text-zinc-500 dark:text-zinc-400">
+            {image.focalLength}
+          </p><p class="text-base text-zinc-500 dark:text-zinc-400">
+            {image.shutterSpeed}
+          </p>
+        </div><p class="text-lg text-zinc-500 dark:text-zinc-400">
+          {image.description}
+        </p>
+      </div>
     </div>
-    <div class="flex flex-col">
-      <p><span class="font-semibold">Camera: </span>{image.camera}</p>
-      <p><span class="font-semibold">Focal length: </span>{image.focalLength}</p>
-      <p><span class="font-semibold">Shutter speed: </span>{image.shutterSpeed}</p>
-      <p><span class="font-semibold">Aperture: </span>{image.aperture}</p>
-      <p><span class="font-semibold">Location: </span>{image.location}</p>
-      <p>{image.description}</p>
-    </div>
-  </div>
+  </section>
 </Layout>

@@ -1,0 +1,22 @@
+---
+import Gallery from "~/components/Gallery.astro";
+import Layout from "~/layouts/Layout.astro";
+import { getCategoryImages, showMoreImages } from "~/utils/images";
+
+export const getStaticPaths = () => {
+  return [
+    { params: { id: "street" } },
+    { params: { id: "landscape" } },
+    { params: { id: "abstract" } },
+  ];
+};
+const { id } = Astro.params;
+// const images = await getCategoryImages(id!);
+const fetched = await getCategoryImages(id!);
+const images = showMoreImages(fetched);
+---
+
+<Layout title={`${id} photography`}>
+  <h1>{id}</h1>
+  <Gallery {images} />
+</Layout>

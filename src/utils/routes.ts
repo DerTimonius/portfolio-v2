@@ -1,6 +1,6 @@
 import fetchApi from '~/lib/strapi';
 
-import { getImageInfo } from './getImageInfo';
+import { getImageInfo } from './images';
 import { type ApiImage, type Image } from './interface';
 
 export const routes = {

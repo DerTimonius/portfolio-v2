@@ -1,33 +1,37 @@
 ---
-import { Image } from 'astro:assets';
-import type { Image as ImageType} from '~/utils/interface'
+import { Image } from "astro:assets";
+import type { Image as ImageType } from "~/utils/interface";
 
 interface Props {
-  image: ImageType
+  image: ImageType;
 }
 
-const {image} = Astro.props
+const { image } = Astro.props;
 ---
 
 <a
-href={`/image/${image.slug}`}
-class="group h-72 md:h-96 w-56 md:w-72 flex justify-end items-end bg-gray-100 overflow-hidden rounded-xl shadow-lg relative gallery-item hover:shadow-xl"
+  href={`/image/${image.slug}`}
+  class="group h-72 md:h-96 w-56 md:w-72 flex justify-end items-end bg-gray-100 overflow-hidden rounded-xl shadow-lg relative hover:shadow-xl"
 >
-  <div class="w-full h-full flex object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200 text-transparent">
+  <div
+    class="w-full h-full flex object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200"
+  >
     <Image
       src={image.url}
       alt={image.title}
       height={image.height}
       width={image.width}
       transition:name={`${image.title}-image`}
-      />
-    </div>
-
-    <div class="bg-gradient-to-t from-black via-transparent to-transparent opacity-20 absolute inset-0 pointer-events-none group-hover:opacity-0 transition duration-200" />
-
-    <span class="inline-block text-gray-200 text-xs md:text-sm border border-gray-500 rounded-lg backdrop-blur relative px-2 md:px-3 py-1 mr-3 mb-3 group-hover:opacity-0 transition duration-200"
+    />
+  </div>
+  <div
+    class="bg-gradient-to-t from-black via-transparent to-transparent opacity-20 absolute inset-0 pointer-events-none group-hover:opacity-0 transition duration-200"
+  >
+  </div>
+  <span
+    class="inline-block text-gray-200 text-xs md:text-sm border border-gray-500 rounded-lg backdrop-blur relative px-2 md:px-3 py-1 mr-3 mb-3 group-hover:opacity-0 transition duration-200"
     transition:name={`${image.title}-name`}
-    >
-      {image.title}
-    </span>
+  >
+    {image.title}
+  </span>
 </a>

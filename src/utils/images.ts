@@ -22,6 +22,8 @@ export function getImageInfo(image: ApiImage, withAttributes = true): Image {
       }`
     : '';
   const slug = image.attributes.slug;
+  const category = image.attributes.category;
+  const portfolio = image.attributes.portfolio;
 
   return {
     title,
@@ -35,6 +37,8 @@ export function getImageInfo(image: ApiImage, withAttributes = true): Image {
     slug,
     location,
     description,
+    category,
+    portfolio,
   };
 }
 
@@ -44,4 +48,26 @@ export async function getSingleImage(slug: string): Promise<Image> {
     query: '?populate=*',
   });
   return getImageInfo(data);
+}
+
+export async function getCategoryImages(id: string): Promise<Image[]> {
+  const data = await fetchApi<ApiImage[]>({
+    endpoint: 'images',
+    query: `?filters[category][$eq]=${id}&populate=*`,
+  });
+
+  return data.map((img) => getImageInfo(img));
+}
+
+export async function getPortfolioImages(): Promise<Image[]> {
+  const data = await fetchApi<ApiImage[]>({
+    endpoint: 'images',
+    query: '?filters[portfolio][$eq]=true',
+  });
+
+  return data.map((img) => getImageInfo(img));
+}
+
+export function showMoreImages(images: Image[]): Image[] {
+  return new Array(5).fill(images).flat();
 }

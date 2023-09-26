@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import type { Image as ImageType } from "~/utils/interface";
+interface Props {
+  image: ImageType;
+}
+
+const { image } = Astro.props;
+---
+
+<div
+  class="max-h-screen max-w-screen snap-always snap-start first:scroll-m-32 rounded-xl"
+>
+  <Image
+    src={image.url}
+    alt={image.title}
+    height={image.height}
+    width={image.width}
+    transition:name={`${image.title}-image`}
+    class="h-screen w-screen object-contain"
+  />
+</div>

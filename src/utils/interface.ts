@@ -10,6 +10,8 @@ export interface ApiImage {
     location: string;
     file: FileInfo;
     slug: string;
+    category: string;
+    portfolio: boolean;
   };
 }
 
@@ -37,4 +39,6 @@ export interface Image {
   slug: string;
   description: string;
   location: string;
+  category: string;
+  portfolio: boolean;
 }
