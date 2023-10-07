@@ -1,14 +1,18 @@
+import landscapeImage from '~/images/DSCF0441.jpg';
+import abstractImage from '~/images/DSCF0480.jpg';
+import streetImage from '~/images/DSCF0498.jpg';
 import fetchApi from '~/lib/strapi';
 
 import { getImageInfo } from './images';
-import { type ApiImage, type Image } from './interface';
+import { type ApiImage } from './interface';
 
-export const routes = {
-  '/': 'portfolio',
-  street: 'street',
-  landscape: 'landscape',
-  shadow: 'shadow',
-} as const;
+export const categories = {
+  landscape: landscapeImage,
+  street: streetImage,
+  abstract: abstractImage,
+};
+
+export type Category = keyof typeof categories;
 
 export async function getImageRoutes(): Promise<string[]> {
   const fetchedImages = await fetchApi<ApiImage[]>({

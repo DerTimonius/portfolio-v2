@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
-import type { Image as ImageType } from "~/utils/interface";
+import { Image } from 'astro:assets';
+import type { Image as ImageType } from '~/utils/interface';
 interface Props {
   image: ImageType;
 }
@@ -9,7 +9,8 @@ const { image } = Astro.props;
 ---
 
 <div
-  class="max-h-screen max-w-screen snap-always snap-start first:scroll-m-32 rounded-xl"
+  class="max-h-screen max-w-screen snap-always snap-start rounded-xl"
+  id="portfolio"
 >
   <Image
     src={image.url}

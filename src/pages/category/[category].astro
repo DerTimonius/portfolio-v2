@@ -1,0 +1,29 @@
+---
+import Gallery from '~/components/Gallery.astro';
+import Layout from '~/layouts/Layout.astro';
+import { getCategoryImages, showMoreImages } from '~/utils/images';
+import { categories, type Category } from '~/utils/routes';
+
+export const getStaticPaths = () => {
+  return Object.keys(categories).map((category) => {
+    return { params: { category } };
+  });
+};
+const { category } = Astro.params as { category: Category };
+// const images = await getCategoryImages(id!);
+const fetched = await getCategoryImages(category);
+const images = showMoreImages(fetched);
+const image = categories[category];
+---
+
+<Layout title={`${category} photography`}>
+  <div
+    class=`bg-cover bg-center`
+    style={`background-image: url(${image.src});`}
+  >
+    <h1 class="mix-blend-lighten font-bold text-black text-9xl bg-white p-16">
+      {category.toUpperCase()}
+    </h1>
+  </div>
+  <Gallery {images} />
+</Layout>

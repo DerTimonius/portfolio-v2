@@ -1,6 +1,7 @@
 import fetchApi from '~/lib/strapi';
 
 import type { ApiImage, Image } from './interface';
+import type { Category } from './routes';
 
 export function getImageInfo(image: ApiImage, withAttributes = true): Image {
   const title = image.attributes.title;
@@ -50,10 +51,10 @@ export async function getSingleImage(slug: string): Promise<Image> {
   return getImageInfo(data);
 }
 
-export async function getCategoryImages(id: string): Promise<Image[]> {
+export async function getCategoryImages(category: Category): Promise<Image[]> {
   const data = await fetchApi<ApiImage[]>({
     endpoint: 'images',
-    query: `?filters[category][$eq]=${id}&populate=*`,
+    query: `?filters[category][$eq]=${category}&populate=*`,
   });
 
   return data.map((img) => getImageInfo(img));

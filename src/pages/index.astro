@@ -1,14 +1,16 @@
 ---
-import Layout from "~/layouts/Layout.astro";
-import fetchApi from "~/lib/strapi";
-import type { Image as ImageT, ApiImage as ImageType } from "~/utils/interface";
-import { getImageInfo } from "~/utils/images";
-import Gallery from "~/components/Gallery.astro";
+import Layout from '~/layouts/Layout.astro';
+import fetchApi from '~/lib/strapi';
+import type { Image as ImageT, ApiImage as ImageType } from '~/utils/interface';
+import { getImageInfo } from '~/utils/images';
+import Gallery from '~/components/Gallery.astro';
+import { Image } from 'astro:assets';
+import landscapeImage from '~/images/DSCF0441.jpg';
 
 const fetched = await fetchApi<ImageType[]>({
-  endpoint: "images",
+  endpoint: 'images',
   returnOnlyData: true,
-  query: "?populate=*",
+  query: '?populate=*',
 });
 // const images = fetched.map((img) => getImageInfo(img))
 const imagesWithInfo = fetched.map((img) => getImageInfo(img));
@@ -16,62 +18,103 @@ const images = new Array(4).fill(imagesWithInfo).flat() as ImageT[];
 ---
 
 <Layout title="DerTimonius Photography">
-  <div class="snap-y snap-mandatory overflow-scroll">
-    <h1>This is a gallery</h1>
-    <Gallery {images} portfolio />
+  <div>
+    <div class="min-h-screen flex justify-center items-center">
+      <!-- Container -->
+      <div
+        class="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32"
+      >
+        <!-- Component -->
+        <div
+          class="grid grid-cols-1 items-center gap-8 md:gap-16 lg:grid-cols-2 lg:gap-24"
+        >
+          <!-- Hero Heading -->
+          <div class="flex flex-col items-start">
+            <div class="mb-5">
+              <h1 class="text-4xl font-bold text-white md:text-6xl">
+                capture light. {' '}
+                 create art.
+              </h1>
+            </div>
+            <div class="mb-7">
+              <div class="mx-auto w-full max-w-lg">
+                <p class="text-[#7c8aaa]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
+                  aliquam, purus sit amet luctus venenatis, lectus
+                </p>
+              </div>
+            </div>
+            <!-- Button Wrap -->
+            <div class="flex flex-wrap items-center gap-4">
+              <a
+                href="/category/street"
+                class="rounded-[60px] bg-[#2d6ae0] px-6 py-4 text-center font-bold text-white transition hover:bg-[#081631]"
+                >route should be changed</a
+              >
+            </div>
+          </div>
+          <!-- Hero Image -->
+          <div>
+            <Image src={landscapeImage} alt="" class="inline-block" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="snap-y overflow-scroll">
+      <Gallery {images} portfolio />
+    </div>
   </div>
-</Layout>
 
-<style>
-  .astro-a {
-    position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translatex(-50%);
-    width: 220px;
-    height: auto;
-    z-index: -1;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(
-      rgba(var(--accent-dark), 66%),
-      rgba(var(--accent-dark), 33%)
-    );
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
-    border-radius: 4px;
-    padding: 0.3em 0.4em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent-light));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
-  }
-</style>
- ~/utils/images
+  <style>
+    .astro-a {
+      position: absolute;
+      top: -32px;
+      left: 50%;
+      transform: translatex(-50%);
+      width: 220px;
+      height: auto;
+      z-index: -1;
+    }
+    h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .text-gradient {
+      background-image: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 400%;
+      background-position: 0%;
+    }
+    .instructions {
+      margin-bottom: 2rem;
+      border: 1px solid rgba(var(--accent-light), 25%);
+      background: linear-gradient(
+        rgba(var(--accent-dark), 66%),
+        rgba(var(--accent-dark), 33%)
+      );
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+    .instructions code {
+      font-size: 0.8em;
+      font-weight: bold;
+      background: rgba(var(--accent-light), 12%);
+      color: rgb(var(--accent-light));
+      border-radius: 4px;
+      padding: 0.3em 0.4em;
+    }
+    .instructions strong {
+      color: rgb(var(--accent-light));
+    }
+    .link-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+      gap: 2rem;
+      padding: 0;
+    }
+  </style>
+</Layout>
