@@ -12,23 +12,22 @@
     "lint": "biome lint . --apply"
   },
   "dependencies": {
-    "@astrojs/react": "^3.0.2",
-    "@astrojs/tailwind": "^5.0.0",
-    "@fontsource-variable/quicksand": "^5.0.8",
+    "@astrojs/react": "^3.0.3",
+    "@astrojs/tailwind": "^5.0.1",
+    "@fontsource-variable/quicksand": "^5.0.12",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "astro": "^3.0.8",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.11",
+    "astro": "^3.2.3",
     "classnames": "^2.3.2",
-    "clsx": "^2.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "tailwindcss": "^3.0.24"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.1.0",
+    "@biomejs/biome": "^1.2.2",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0",
-    "prettier-plugin-tailwindcss": "^0.5.4"
+    "prettier-plugin-tailwindcss": "^0.5.5"
   }
 }
