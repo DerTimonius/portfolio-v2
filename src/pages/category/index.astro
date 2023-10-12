@@ -1,0 +1,21 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import fetchApi from '~/lib/strapi';
+import { getImageInfo, countImagesPerCategory } from '~/utils/images';
+import type { ApiImage } from '~/utils/interface';
+import { Carousel } from '~/components/Carousel';
+
+// TODO: replace with getPortfolioImages()
+const fetched = await fetchApi<ApiImage[]>({
+  endpoint: 'images',
+  returnOnlyData: true,
+  query: '?populate=*',
+});
+const images = fetched.map((img) => getImageInfo(img));
+---
+
+<Layout title="Portfolio - DerTimonius">
+  <h1>Portfolio</h1>
+
+  <Carousel {images} client:load />
+</Layout>

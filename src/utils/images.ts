@@ -72,3 +72,19 @@ export async function getPortfolioImages(): Promise<Image[]> {
 export function showMoreImages(images: Image[]): Image[] {
   return new Array(5).fill(images).flat();
 }
+
+export function countImagesPerCategory(
+  images: Image[],
+): Record<Category, number> {
+  return images.reduce(
+    (acc, image) => {
+      if (acc[image.category]) {
+        acc[image.category]++;
+      } else {
+        acc[image.category] = 1;
+      }
+      return acc;
+    },
+    {} as Record<Category, number>,
+  );
+}

@@ -1,3 +1,5 @@
+import type { Category } from './routes';
+
 export interface ApiImage {
   id: number;
   attributes: {
@@ -10,7 +12,7 @@ export interface ApiImage {
     location: string;
     file: FileInfo;
     slug: string;
-    category: string;
+    category: Category;
     portfolio: boolean;
   };
 }
@@ -39,6 +41,6 @@ export interface Image {
   slug: string;
   description: string;
   location: string;
-  category: string;
+  category: Category;
   portfolio: boolean;
 }
