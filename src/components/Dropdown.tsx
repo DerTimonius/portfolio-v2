@@ -8,7 +8,7 @@ export function Dropdown() {
           id="dropdownNavbarLink"
           type="button"
           data-dropdown-toggle="dropdownNavbar"
-          className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded md:border-0 md:p-0 md:w-auto dark:text-white"
+          className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-slate-800 rounded md:border-0 md:p-0 md:w-auto"
         >
           Categories
           {/* biome-ignore lint/a11y/noSvgWithoutTitle: not-needed */}

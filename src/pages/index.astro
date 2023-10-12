@@ -31,27 +31,36 @@ const images = new Array(4).fill(imagesWithInfo).flat() as ImageT[];
           <!-- Hero Heading -->
           <div class="flex flex-col items-start">
             <div class="mb-5">
-              <h1 class="text-4xl font-bold text-white md:text-6xl">
+              <h1
+                class="'inline-flex animate-background-shine bg-[linear-gradient(110deg,#939393,45%,#1e293b,55%,#939393)] bg-[length:250%_100%] bg-clip-text text-4xl md:text-6xl text-transparent'"
+              >
                 capture light. {' '}
                  create art.
               </h1>
             </div>
             <div class="mb-7">
               <div class="mx-auto w-full max-w-lg">
-                <p class="text-[#7c8aaa]">
+                <p class="text-slate-600">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
                   aliquam, purus sit amet luctus venenatis, lectus
                 </p>
               </div>
             </div>
             <!-- Button Wrap -->
-            <div class="flex flex-wrap items-center gap-4">
-              <a
-                href="/category/street"
-                class="rounded-[60px] bg-[#2d6ae0] px-6 py-4 text-center font-bold text-white transition hover:bg-[#081631]"
-                >route should be changed</a
+            <a href="/category">
+              <button
+                class="min-w-[240px] relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
               >
-            </div>
+                <span
+                  class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"
+                ></span>
+                <span
+                  class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl"
+                >
+                  Click Me
+                </span>
+              </button>
+            </a>
           </div>
           <!-- Hero Image -->
           <div>

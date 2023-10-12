@@ -1,7 +1,7 @@
 ---
-import { ViewTransitions } from "astro:transitions";
-import Navbar from "~/components/Navbar.astro";
-import "@fontsource-variable/quicksand"
+import { ViewTransitions } from 'astro:transitions';
+import Navbar from '~/components/Navbar.astro';
+import '@fontsource-variable/quicksand';
 
 interface Props {
   title: string;
@@ -23,7 +23,7 @@ const { title } = Astro.props;
   <body>
     <Navbar />
     <main
-      class="m-auto px-6 w-[1440px] max-w-[calc(100% - 2rem)] min-h-screen flex flex-col justify-center items-center text-white text-xl overflow-auto font-sans"
+      class="m-auto px-6 w-[1440px] max-w-[calc(100% - 2rem)] min-h-screen flex flex-col justify-center items-center bg-white text-slate-800 text-xl overflow-auto font-sans"
     >
       <slot />
     </main>
@@ -41,9 +41,5 @@ const { title } = Astro.props;
       rgb(var(--accent-light)) 30%,
       white 60%
     );
-  }
-  html {
-    background: #13151a;
-    background-size: 224px;
   }
 </style>
